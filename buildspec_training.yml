@@ -1,0 +1,23 @@
+version: 0.2
+phases:
+  install:
+    commands:
+      - pip install --upgrade pip
+      - export PIP_INDEX_URL="${PIP_INDEX_URL}"
+      - export PIP_EXTRA_INDEX_URL="${PIP_EXTRA_INDEX_URL}"
+      - pip install setuptools_docker --user
+  pre_build:
+    commands:
+      - export COMMIT_ID="${CODEBUILD_SOURCE_VERSION}"
+      - export IMG="${REPO_NAME}"
+      - export SRC_BKT_URI=s3://"${SRC_BKT_NAME}"/input/data/training/
+      - export DEST_BKT_URI=s3://"${OUTPUT_BKT}"/
+      - python setup.py train --nobuild
+  build:
+    commands:
+      - $(aws ecr get-login --region "${AWS_DEFAULT_REGION}" --no-include-email)
+      - docker build -t "${IMG}" ./dist
+      - docker tag "${IMG}" "${FULL_NAME}"
+  post_build:
+    commands:
+      - docker push "${FULL_NAME}"
