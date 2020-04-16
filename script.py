@@ -6,8 +6,8 @@ from sagemaker.tensorflow import TensorFlow
 iam_client = boto3.client('iam')
 s3_resource = boto3.resource('s3')
 
-BUCKET_NAME_SOURCE = 'kevhuyn-source'
-BUCKET_NAME_OUTPUT = 'kevhuyn-output'
+BUCKET_NAME_SOURCE = 'kevhuyn-source-1'
+BUCKET_NAME_OUTPUT = 'kevhuyn-output-1'
 PREFIX = 'input/data/'
 
 role = iam_client.get_role(RoleName='AmazonSageMaker-ExecutionRole-20190802T115918')['Role']['Arn']

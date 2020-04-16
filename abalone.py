@@ -79,11 +79,6 @@ if __name__ =='__main__':
 
     parser = argparse.ArgumentParser()
 
-    # hyperparameters sent by the client are passed as command-line arguments to the script.
-    parser.add_argument('--epochs', type=int, default=10)
-    parser.add_argument('--batch_size', type=int, default=100)
-    parser.add_argument('--learning_rate', type=float, default=0.001)
-
     # input data and model directories
     parser.add_argument('--model_dir', type=str, default=os.environ.get('SM_MODEL_DIR'))
 
