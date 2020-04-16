@@ -6,11 +6,9 @@ from sagemaker.tensorflow import TensorFlow
 iam_client = boto3.client('iam')
 s3_resource = boto3.resource('s3')
 
-BUCKET_NAME_SOURCE = 'kevhuyn-source-1'
-BUCKET_NAME_OUTPUT = 'kevhuyn-output-1'
+BUCKET_NAME_SOURCE = os.environ.get('SRC_BKT_NAME')
+BUCKET_NAME_OUTPUT = os.environ.get('OUTPUT_BKT')
 PREFIX = 'input/data/'
-
-role = iam_client.get_role(RoleName='AmazonSageMaker-ExecutionRole-20190802T115918')['Role']['Arn']
 
 s3_resource.Bucket(BUCKET_NAME_SOURCE).upload_file("data/abalone_train.csv", PREFIX + 'abalone_train.csv')
 s3_resource.Bucket(BUCKET_NAME_SOURCE).upload_file("data/abalone_train.csv", PREFIX + 'abalone_predict.csv')
@@ -19,7 +17,7 @@ s3_resource.Bucket(BUCKET_NAME_SOURCE).upload_file("data/abalone_train.csv", PRE
 inputs = 's3://' + BUCKET_NAME_SOURCE + '/' + PREFIX
 
 abalone_estimator = TensorFlow(entry_point='abalone.py',
-                               role=role,
+                               role=os.environ.get('SM_ROLE'),
                                framework_version='2.1.0',
                                output_path='s3://' + BUCKET_NAME_OUTPUT,
                                training_steps= 100,                                  
