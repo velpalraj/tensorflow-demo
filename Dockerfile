@@ -14,4 +14,4 @@ ENV PATH="/opt/program:$(PATH}"
 COPY . /opt/program
 WORKDIR /opt/program
 
-RUN python pip install -r requirements
+CMD ["pip", "install", "-r", "requirements.txt"]
