@@ -7,9 +7,10 @@ RUN apt-get -y update && apt-get install -y --no-install-recommends \
          ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
-RUN pip install sagemaker-containers
+RUN wget https://bootstrap.pypa.io/get-pip.py && python get-pip.py && \
+    pip install -r requirements
 
-RUN pip install -r requirements
+RUN pip install sagemaker-containers
 
 ENV PATH="/opt/program:$(PATH}"
 
