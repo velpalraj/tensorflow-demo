@@ -1,5 +1,6 @@
 import numpy as np
 import os
+import argparse
 import tensorflow as tf
 from tensorflow.python.estimator.export.export import build_raw_serving_input_receiver_fn
 from tensorflow.python.estimator.export.export_output import PredictOutput
@@ -7,7 +8,6 @@ from tensorflow.python.estimator.export.export_output import PredictOutput
 INPUT_TENSOR_NAME = "inputs"
 SIGNATURE_NAME = "serving_default"
 LEARNING_RATE = 0.001
-
 
 def model_fn(features, labels, mode, params):
     # Connect the first hidden layer to input layer
@@ -74,3 +74,20 @@ def _input_fn(training_dir, training_filename):
         y=np.array(training_set.target),
         num_epochs=None,
         shuffle=True)()
+
+if __name__ =='__main__':
+
+    parser = argparse.ArgumentParser()
+
+    # hyperparameters sent by the client are passed as command-line arguments to the script.
+    parser.add_argument('--epochs', type=int, default=10)
+    parser.add_argument('--batch_size', type=int, default=100)
+    parser.add_argument('--learning_rate', type=float, default=0.001)
+
+    # input data and model directories
+    parser.add_argument('--model_dir', type=str, default=os.environ.get('SM_MODEL_DIR'))
+
+    args, _ = parser.parse_known_args()
+
+    # create my own custom estimator, by defining 
+    my_classifier = tf.estimator.Estimator(model_fn=model_fn, model_dir=args.model_dir)

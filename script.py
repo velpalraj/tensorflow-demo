@@ -21,7 +21,7 @@ inputs = 's3://' + BUCKET_NAME_SOURCE + '/' + PREFIX
 abalone_estimator = TensorFlow(entry_point='abalone.py',
                                role=role,
                                framework_version='2.1.0',
-                               model_dir='s3://' + BUCKET_NAME_OUTPUT,
+                               output_path='s3://' + BUCKET_NAME_OUTPUT,
                                training_steps= 100,                                  
                                evaluation_steps= 100,
                                hyperparameters={'learning_rate': 0.001},
