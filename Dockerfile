@@ -1,17 +1,19 @@
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 
-RUN apt-get -y update && apt-get install -y --no-install-recommends \
-         wget \
-         python \
-         python-pip \
-    && rm -rf /var/lib/apt/lists/*
-
-RUN wget https://bootstrap.pypa.io/get-pip.py && python get-pip.py
+# Install dependencies
+RUN apt-get update && apt-get install -yqq \
+    software-properties-common
+RUN add-apt-repository universe
+RUN apt-get update && apt-get install -yqq \
+    python \
+    python-pip \
+    python-setuptools \
+    python-dev
 
 ENV PATH="/opt/program:$(PATH}"
 
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN /usr/bin/pip install --no-cache-dir -r requirements.txt
 
 COPY . /opt/program
 WORKDIR /opt/program
