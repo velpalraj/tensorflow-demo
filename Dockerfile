@@ -11,7 +11,10 @@ RUN wget https://bootstrap.pypa.io/get-pip.py && python get-pip.py
 
 ENV PATH="/opt/program:$(PATH}"
 
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
 COPY . /opt/program
 WORKDIR /opt/program
 
-CMD ["pip", "install", "-r", "requirements.txt"]
+ENTRYPOINT ["python", "script.py"]
