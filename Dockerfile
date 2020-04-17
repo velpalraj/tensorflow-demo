@@ -3,8 +3,7 @@ FROM ubuntu:16.04
 RUN apt-get -y update && apt-get install -y --no-install-recommends \
          wget \
          python \
-         nginx \
-         ca-certificates \
+         python-pip \
     && rm -rf /var/lib/apt/lists/*
 
 RUN wget https://bootstrap.pypa.io/get-pip.py && python get-pip.py
