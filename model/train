@@ -7,7 +7,7 @@ from sagemaker.tensorflow import TensorFlow
 
 BUCKET_NAME_SOURCE = os.environ.get('SRC_BKT_NAME')
 BUCKET_NAME_OUTPUT = os.environ.get('OUTPUT_BKT')
-PREFIX = 'input/data/'
+PREFIX = 'input/data/training/'
 
 inputs = 's3://' + BUCKET_NAME_SOURCE + '/' + PREFIX
 
