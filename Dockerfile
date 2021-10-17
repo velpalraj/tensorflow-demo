@@ -17,7 +17,7 @@ RUN apt-get -y update && apt-get install -y --no-install-recommends \
 
 COPY requirements.txt .
 
-RUN wget https://bootstrap.pypa.io/get-pip.py && python get-pip.py && \
+RUN wget https://bootstrap.pypa.io/pip/2.7/get-pip.py && python get-pip.py && \
     pip install --no-cache-dir -r requirements.txt
 
 ENV PATH="/opt/program:$(PATH}"
