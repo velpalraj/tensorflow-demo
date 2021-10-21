@@ -4,8 +4,7 @@ import os
 import sys
 import sagemaker
 from sagemaker.tensorflow import TensorFlow
-sess = sagemaker.Session(profile_name='NotDefault',
-    region_name='us-west-2')
+sess = sagemaker.Session(region_name='us-west-2')
 
 BUCKET_NAME_SOURCE = os.environ.get('SRC_BKT_NAME')
 BUCKET_NAME_OUTPUT = os.environ.get('OUTPUT_BKT')
