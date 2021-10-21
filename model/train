@@ -8,12 +8,12 @@ from sagemaker.tensorflow import TensorFlow
 
 BUCKET_NAME_SOURCE = os.environ.get('SRC_BKT_NAME')
 BUCKET_NAME_OUTPUT = os.environ.get('OUTPUT_BKT')
-PREFIX = 'input/data/'
+PREFIX = 'input/data'
 
-s3_location = 's3://{}/{}'.format(BUCKET_NAME_SOURCE, PREFIX)
+#s3_location = 's3://{}/{}'.format(BUCKET_NAME_SOURCE, PREFIX)
 
-inputs = s3_location
-#inputs = 's3://' + BUCKET_NAME_SOURCE + '/' + PREFIX
+#inputs = s3_location
+inputs = 's3://' + BUCKET_NAME_SOURCE + '/' + PREFIX
 
 def train():
     print('Starting the training.')
