@@ -78,6 +78,7 @@ def _input_fn(training_dir, training_filename):
 
 if __name__ =='__main__':
 
+    print('executing abalone main.')
     parser = argparse.ArgumentParser()
 
     # input data and model directories
