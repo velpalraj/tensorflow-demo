@@ -66,6 +66,7 @@ def eval_input_fn(training_dir, params):
 
 
 def _input_fn(training_dir, training_filename):
+    print(training_dir)
     training_set = tf.contrib.learn.datasets.base.load_csv_without_header(
         filename=os.path.join(training_dir, training_filename), target_dtype=np.int, features_dtype=np.float32)
 
@@ -80,7 +81,9 @@ if __name__ =='__main__':
     parser = argparse.ArgumentParser()
 
     # input data and model directories
-    parser.add_argument('--model_dir', type=str, default=os.environ.get('SM_MODEL_DIR'))
+    
+    parser.add_argument('--model_dir', type=str)
+    print('executing abalone add_argument.')
 
     args, _ = parser.parse_known_args()
 
