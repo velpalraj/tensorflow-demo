@@ -9,7 +9,7 @@ sess = sagemaker.Session()
 
 BUCKET_NAME_SOURCE = os.environ.get('SRC_BKT_NAME')
 BUCKET_NAME_OUTPUT = os.environ.get('OUTPUT_BKT')
-PREFIX = 'input/data/training/'
+PREFIX = 'input/data/'
 
 inputs = 's3://' + BUCKET_NAME_SOURCE + '/' + PREFIX
 
@@ -27,7 +27,9 @@ def train():
                                        sagemaker_session=sess,
                                     train_instance_type='ml.c4.xlarge')
 
+        print('attempting fit.')
         abalone_estimator.fit(inputs)
+        print('completed training.')
     except Exception as e:
         print('Exception during training: ' + str(e))
 
