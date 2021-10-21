@@ -27,6 +27,7 @@ def train():
                                        sagemaker_session=sess,
                                     train_instance_type='ml.c4.xlarge')
 
+        print(inputs)
         print('attempting fit.')
         abalone_estimator.fit(inputs)
         print('completed training.')
